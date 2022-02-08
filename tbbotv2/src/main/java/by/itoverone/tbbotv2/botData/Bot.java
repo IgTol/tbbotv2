@@ -1,4 +1,4 @@
-package by.itoverone.tbbotv2.core;
+package by.itoverone.tbbotv2.botData;
 
 import by.itoverone.tbbotv2.dao.BotStatusService;
 
@@ -18,7 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 import java.util.List;
 
-import static by.itoverone.tbbotv2.BotLoginData.BotLoginProperties.*;
+import static by.itoverone.tbbotv2.botData.BotLoginProperties.*;
 
 @Component
 public class Bot extends TelegramLongPollingBot {

@@ -6,29 +6,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BotStatusService {
-    private final BotStatusRepository repository;
+    private final BotStatusRepository botStatusRepository;
 
     public BotStatusService(BotStatusRepository repository) {
-        this.repository = repository;
+        this.botStatusRepository = repository;
     }
 
     public BotStatus save(BotStatus botStatus) {
-        return repository.save(botStatus);
+        return botStatusRepository.save(botStatus);
     }
 
     public void deleteBotStatus(String chatId) {
-        repository.deleteBotStatus(chatId);
+        botStatusRepository.deleteBotStatus(chatId);
     }
 
     public BotStatus findById(String chatId) {
-        return repository.getById(chatId);
+        return botStatusRepository.getById(chatId);
     }
 
     public BotStatus findFirstByChatId(String chatId) {
-        return repository.findFirstByChatId(chatId);
+        return botStatusRepository.findFirstByChatId(chatId);
     }
 
     public void updateBotStatus(String chatId, String status) {
-        repository.updateBotStatus(chatId, status);
+        botStatusRepository.updateBotStatus(chatId, status);
     }
 }

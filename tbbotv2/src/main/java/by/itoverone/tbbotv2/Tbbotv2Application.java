@@ -1,6 +1,6 @@
 package by.itoverone.tbbotv2;
 
-import by.itoverone.tbbotv2.core.Bot;
+import by.itoverone.tbbotv2.botData.Bot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
