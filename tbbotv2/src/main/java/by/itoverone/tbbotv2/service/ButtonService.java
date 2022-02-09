@@ -12,21 +12,22 @@ public class ButtonService {
     public List<List<InlineKeyboardButton>> createButtons() {
         InlineKeyboardButton createAd = new InlineKeyboardButton();
         createAd.setText("Create announcement");
-        createAd.setCallbackData("1");
+        createAd.setCallbackData("CR");
         InlineKeyboardButton showAd = new InlineKeyboardButton();
         showAd.setText("Show announcements");
-        showAd.setCallbackData("2");
+        showAd.setCallbackData("SH");
         InlineKeyboardButton myAd = new InlineKeyboardButton();
         myAd.setText("My announcements");
-        myAd.setCallbackData("3");
+        myAd.setCallbackData("MA");
         List<InlineKeyboardButton> firstRow = new ArrayList<>();
         List<InlineKeyboardButton> secondRow = new ArrayList<>();
+        List<InlineKeyboardButton> thirdRow = new ArrayList<>();
         firstRow.add(createAd);
-        firstRow.add(showAd);
-        secondRow.add(myAd);
+        secondRow.add(showAd);
+        thirdRow.add(myAd);
         return new ArrayList<>(List.of(
                 firstRow,
-                secondRow
+                secondRow, thirdRow
         ));
     }
 
@@ -65,11 +66,11 @@ public class ButtonService {
     public InlineKeyboardMarkup createAdminMenuButtons() {
         InlineKeyboardButton adAdministration = new InlineKeyboardButton();
         adAdministration.setText("Manage announcement");
-        adAdministration.setCallbackData("4");
-        List<InlineKeyboardButton> thirdRow = new ArrayList<>();
-        thirdRow.add(adAdministration);
+        adAdministration.setCallbackData("AD");
+        List<InlineKeyboardButton> foreRow = new ArrayList<>();
+        foreRow.add(adAdministration);
         List<List<InlineKeyboardButton>> inlineKeyboards = createButtons();
-        inlineKeyboards.add(thirdRow);
+        inlineKeyboards.add(foreRow);
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(inlineKeyboards);
         return markup;
@@ -108,6 +109,23 @@ public class ButtonService {
         inlineButtons.add(buttonsRow);
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(inlineButtons);
+        return markup;
+    }
+    public InlineKeyboardMarkup createLicenseApproveAndRejectButtons(String approveLicenseCallback, String rejectLicenseCallback) {
+        InlineKeyboardButton approveLicenseButton = new InlineKeyboardButton();
+        approveLicenseButton.setText("Approve");
+        approveLicenseButton.setCallbackData(approveLicenseCallback);
+        InlineKeyboardButton rejectLicenseButton = new InlineKeyboardButton();
+        rejectLicenseButton.setText("Deny");
+        rejectLicenseButton.setCallbackData(rejectLicenseCallback);
+
+        List<InlineKeyboardButton> licButtonRow = new ArrayList<>();
+        licButtonRow.add(approveLicenseButton);
+        licButtonRow.add(rejectLicenseButton);
+        List<List<InlineKeyboardButton>> inlineLicButtonRow = new ArrayList<>();
+        inlineLicButtonRow.add(licButtonRow);
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        markup.setKeyboard(inlineLicButtonRow);
         return markup;
     }
 }

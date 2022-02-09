@@ -44,9 +44,13 @@ public class Bot extends TelegramLongPollingBot {
             String message = update.getMessage().getText();
             if (message != null) {
                 String chatId = update.getMessage().getChatId().toString();
-                if (message.startsWith("/start")) {
+                if (message.startsWith("/start"))
+                {
                     showMenu(chatId);
-                } else if (botStatus != null && update.getMessage().hasText()) {
+                }
+                else
+
+                    if (botStatus != null && update.getMessage().hasText()) {
                     String id = dbup.getId();
                     botStatus = botStatusService.findFirstByChatId(chatId);
                     if (botStatus.getStatus().equals(BotEnum.ASK_MODEL.toString())) {
@@ -90,12 +94,11 @@ public class Bot extends TelegramLongPollingBot {
                     }
                 }
             }
-        }
-        else if (update.hasCallbackQuery()) {
+        } else if (update.hasCallbackQuery()) {
             String chatId = update.getCallbackQuery().getMessage().getChatId().toString();
             String button = update.getCallbackQuery().getData();
 
-            if (button.startsWith("1")) {
+            if (button.startsWith("CR")) {
                 botStatus = botStatusService.findById(chatId);
                 if (botStatus != null) {
                     botStatusService.deleteBotStatus(chatId);
@@ -109,21 +112,20 @@ public class Bot extends TelegramLongPollingBot {
                 dbup.setChatId(chatId);
                 dbService.saveAd(dbup);
                 askAboutBrand(chatId);
-            } else if (button.startsWith("2") || button.startsWith("3") || button.startsWith("4")) {
+            } else if (button.startsWith("SH") || button.startsWith("MA") || button.startsWith("AD")) {
                 List<Dbup> dbUpList;
                 String role;
 
-                if (button.startsWith("2")) {
+                if (button.startsWith("SH")) {
                     dbUpList = dbService.getByStatus(AnnEnum.APPROVED.toString());
                     role = "ALL_ANN";
-                } else if (button.startsWith("3")) {
+                } else if (button.startsWith("MA")) {
                     dbUpList = dbService.findByChatId(chatId);
                     role = "MY_ANN";
                 } else {
                     dbUpList = dbService.getByStatus(AnnEnum.WAITING.toString());
                     role = "ADMIN";
                 }
-
                 messageService.createMessage(chatId, dbUpList.toString());
                 showAds(chatId, dbUpList, role);
 
@@ -175,10 +177,10 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @SneakyThrows
-    private void showAds(String chatId, List<Dbup> dbupList, String role) {
+    private void showAds(String chatId, List<Dbup> dbUpList, String role) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        for (Dbup dbup : dbupList) {
+        for (Dbup dbup : dbUpList) {
             sendMessage.setText(
                     dbup.getDescription() + "\n"
                             + "Brand: " + dbup.getBrand() + "\n"
