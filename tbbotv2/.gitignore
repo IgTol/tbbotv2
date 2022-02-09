@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/java/by/itoverone/tbbotv2/botData/BotLoginProperties.java
